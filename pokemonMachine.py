@@ -38,3 +38,22 @@ pokeX_train, pokeX_test, pokeY_train, pokeY_test = sk.train_test_split(pokedex_f
 
 #I guess all stats can be minmax normalized, but I'm also thinking standardized
 #apparently, standardization works better for normal distributions, which I think pokemon stats are
+
+type_list = ["Normal", "Fire", "Water", "Electric", "Grass",
+            "Ice", "Fighting", "Poison",  "Ground", "Flying",
+            "Psychic", "Bug", "Rock", "Ghost", "Dragon",
+            "Dark", "Steel", "Fairy"]
+type_dict = dict((y,x) for x, y in enumerate(type_list)) #gives me a list of number keys for each type
+
+def normalize_type(type): #ideally, this should take the data of the series type, formatted as "X" or "X/Y"
+    normal = type.split("/") #turn the string into a list, if it has a '/' len=2 with 2 types
+    normal = [type_dict[x] for x in normal] #go through the list and turn each item into its corresponding number key
+    return  normal #return a list, this can be changed to best data type
+
+
+
+#look into sklearn multilabel binarizer
+#I believe this data can be normalized with a keras categoryencoder layer set to count
+
+#I think I can focus on understanding layers while fiddling around with normalizing the data
+#that way, I can proceed to the next step which I believe is creating the model w/ layers
